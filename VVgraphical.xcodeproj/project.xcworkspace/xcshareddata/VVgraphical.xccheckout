@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E6A7EB3F-5FB1-4708-AE79-E772159736D0</string>
+	<key>IDESourceControlProjectName</key>
+	<string>VVgraphical</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>396F4E7F5885085FBE7FD580A37A046B9AF04E63</key>
+		<string>https://github.com/vaibhavvatts/VVgraphicalCharts.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>VVgraphical.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>396F4E7F5885085FBE7FD580A37A046B9AF04E63</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/vaibhavvatts/VVgraphicalCharts.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>396F4E7F5885085FBE7FD580A37A046B9AF04E63</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>396F4E7F5885085FBE7FD580A37A046B9AF04E63</string>
+			<key>IDESourceControlWCCName</key>
+			<string>VVgraphicalCharts</string>
+		</dict>
+	</array>
+</dict>
+</plist>
