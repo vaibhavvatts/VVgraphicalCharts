@@ -35,6 +35,7 @@ typedef NS_ENUM(NSInteger , VVCircleSpeed) {
 @property (nonatomic) CGFloat lineWidth;
 @property UIColor *strokeColor;
 @property UIColor *fillColor;
+@property UIColor *gradientColor;
 @property VVChartBeginPoint startPoint;
 @property VVCircleSpeed circleSpeed;
 @property BOOL isClockwise;

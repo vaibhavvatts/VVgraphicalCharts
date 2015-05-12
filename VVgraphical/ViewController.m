@@ -10,6 +10,7 @@
 #import "CircleChart.h"
 
 
+
 @interface ViewController ()<VVCircleChartProtocol>
 
 @end
@@ -23,11 +24,11 @@
     CircleChart *cc = [[CircleChart alloc]initWithFrame:CGRectMake(50, 50, 200, 200)];
     [cc setStrokeColor:[UIColor redColor]];
     [cc setLineWidth:15];
+    [cc setGradientColor:[UIColor blackColor]];
     cc.delegate = self;
     [cc DrawArc:90];
-    
-    [self.view addSubview:cc];    
-    
+    [self.view addSubview:cc];
+
 }
 
 -(void)circleCompleted

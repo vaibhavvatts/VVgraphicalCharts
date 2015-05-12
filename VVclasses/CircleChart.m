@@ -28,7 +28,7 @@ CGFloat radius;
         _startPoint = VVChartBeginPointTop;
         _isClockwise = YES;
         _circleSpeed = VVCircleVeryFast;
-        
+        _gradientColor = [UIColor clearColor];
         radius = frame.size.width/2 - 6;
     }
     return self;
@@ -47,11 +47,11 @@ CGFloat radius;
 
 -(void)DrawArc:(CGFloat)percentToDraw
 {
-    [self drawArc:percentToDraw radius:radius lineWidth:_lineWidth strokeColor:_strokeColor fillColor:_fillColor startPoint: VVChartBeginPointTop isClockwise:_isClockwise circleSpeed:_circleSpeed];
+    [self drawArc:percentToDraw radius:radius lineWidth:_lineWidth strokeColor:_strokeColor fillColor:_fillColor startPoint: VVChartBeginPointTop isClockwise:_isClockwise circleSpeed:_circleSpeed gradientColor:_gradientColor];
 }
 
 
--(void)drawArc:(CGFloat )percentToDraw radius:(CGFloat)radius lineWidth:(CGFloat)lineWidth strokeColor:(UIColor *)strokeColor fillColor:(UIColor *)fillColor startPoint:(VVChartBeginPoint)startPoint isClockwise:(BOOL)isClockWise circleSpeed:(VVCircleSpeed)circleSpeed
+-(void)drawArc:(CGFloat )percentToDraw radius:(CGFloat)radius lineWidth:(CGFloat)lineWidth strokeColor:(UIColor *)strokeColor fillColor:(UIColor *)fillColor startPoint:(VVChartBeginPoint)startPoint isClockwise:(BOOL)isClockWise circleSpeed:(VVCircleSpeed)circleSpeed gradientColor:(UIColor *)gradientColor;
 {
     CGFloat duration;
     
@@ -107,18 +107,23 @@ CGFloat radius;
     circle.strokeEnd = percentToDraw/100;
     circle.lineCap = kCALineCapRound;
     
+    
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     gradientLayer.startPoint = CGPointMake(0.5,1.0);
     gradientLayer.endPoint = CGPointMake(0.5,0.0);
     gradientLayer.frame = CGRectMake(0, 0, self.frame.size.width , self.frame.size.height);
     NSMutableArray *colors = [NSMutableArray array];
-    [colors addObject:(id)[UIColor blackColor].CGColor];
+    [colors addObject:(id) gradientColor.CGColor];
     [colors addObject:(id)strokeColor.CGColor];
-
     gradientLayer.colors = colors;
-    [gradientLayer setMask:circle];
     
-    [self.layer addSublayer:gradientLayer];
+    if (_gradientColor != [UIColor clearColor]) {
+        [gradientLayer setMask:circle];
+        [self.layer addSublayer:gradientLayer];
+    }else{
+        [self.layer addSublayer:circle];
+    }
+    
     
     CABasicAnimation *drawAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
     drawAnimation.duration            = duration;
@@ -141,15 +146,21 @@ CGFloat radius;
     lblCounting.format = @"%.0f%%";
     [self addSubview:lblCounting];
     
+   
+    
+    
+    NSTimer *t = [NSTimer scheduledTimerWithTimeInterval: duration
+                                                  target: self
+                                                selector:@selector(callCircleCompleted)
+                                                userInfo: nil repeats:NO];
+    
+    
+}
+
+
+-(void)callCircleCompleted
+{
     [self.delegate circleCompleted];
-    
-    
-//    NSTimer *t = [NSTimer scheduledTimerWithTimeInterval: duration
-//                                                  target: self.delegate
-//                                                selector:@selector(circleCompleted)
-//                                                userInfo: nil repeats:NO];
-//    
-    
 }
 
 
