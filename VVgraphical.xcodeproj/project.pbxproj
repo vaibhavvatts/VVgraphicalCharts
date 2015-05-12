@@ -14,6 +14,8 @@
 		CD2A04851B01D34E007BEFA4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD2A04841B01D34E007BEFA4 /* Images.xcassets */; };
 		CD2A04881B01D34E007BEFA4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD2A04861B01D34E007BEFA4 /* LaunchScreen.xib */; };
 		CD2A04941B01D34E007BEFA4 /* VVgraphicalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2A04931B01D34E007BEFA4 /* VVgraphicalTests.m */; };
+		CD2A04A01B01D459007BEFA4 /* CircleChart.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2A049F1B01D459007BEFA4 /* CircleChart.m */; };
+		CD2A04A31B0205F8007BEFA4 /* UICountingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2A04A11B0205F8007BEFA4 /* UICountingLabel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,10 @@
 		CD2A048D1B01D34E007BEFA4 /* VVgraphicalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VVgraphicalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD2A04921B01D34E007BEFA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD2A04931B01D34E007BEFA4 /* VVgraphicalTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VVgraphicalTests.m; sourceTree = "<group>"; };
+		CD2A049E1B01D459007BEFA4 /* CircleChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleChart.h; sourceTree = "<group>"; };
+		CD2A049F1B01D459007BEFA4 /* CircleChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleChart.m; sourceTree = "<group>"; };
+		CD2A04A11B0205F8007BEFA4 /* UICountingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICountingLabel.m; sourceTree = "<group>"; };
+		CD2A04A21B0205F8007BEFA4 /* UICountingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICountingLabel.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +69,7 @@
 		CD2A046B1B01D34E007BEFA4 = {
 			isa = PBXGroup;
 			children = (
+				CD2A049D1B01D3C3007BEFA4 /* VVclasses */,
 				CD2A04761B01D34E007BEFA4 /* VVgraphical */,
 				CD2A04901B01D34E007BEFA4 /* VVgraphicalTests */,
 				CD2A04751B01D34E007BEFA4 /* Products */,
@@ -117,6 +124,17 @@
 				CD2A04921B01D34E007BEFA4 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CD2A049D1B01D3C3007BEFA4 /* VVclasses */ = {
+			isa = PBXGroup;
+			children = (
+				CD2A04A11B0205F8007BEFA4 /* UICountingLabel.m */,
+				CD2A04A21B0205F8007BEFA4 /* UICountingLabel.h */,
+				CD2A049E1B01D459007BEFA4 /* CircleChart.h */,
+				CD2A049F1B01D459007BEFA4 /* CircleChart.m */,
+			);
+			path = VVclasses;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,7 +237,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD2A04A01B01D459007BEFA4 /* CircleChart.m in Sources */,
 				CD2A04801B01D34E007BEFA4 /* ViewController.m in Sources */,
+				CD2A04A31B0205F8007BEFA4 /* UICountingLabel.m in Sources */,
 				CD2A047D1B01D34E007BEFA4 /* AppDelegate.m in Sources */,
 				CD2A047A1B01D34E007BEFA4 /* main.m in Sources */,
 			);
@@ -412,6 +432,7 @@
 				CD2A04991B01D34E007BEFA4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CD2A049A1B01D34E007BEFA4 /* Build configuration list for PBXNativeTarget "VVgraphicalTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +441,7 @@
 				CD2A049C1B01D34E007BEFA4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

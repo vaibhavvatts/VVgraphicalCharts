@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 
+#import "CircleChart.h"
+
 @interface ViewController ()
 
 @end
@@ -17,6 +19,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    CircleChart *cc = [[CircleChart alloc]initWithFrame:CGRectMake(50, 50, 100, 100)];
+    [cc setStrokeColor:[UIColor redColor]];
+    
+    [cc DrawArc:90];    
+    [self.view addSubview:cc];
+    
 }
 
 - (void)didReceiveMemoryWarning {
