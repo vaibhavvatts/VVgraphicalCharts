@@ -29,10 +29,20 @@ CGFloat radius;
         _isClockwise = YES;
         _circleSpeed = VVCircleVeryFast;
         
-        self.frame = frame;
-        radius = frame.size.width/2;
+        radius = frame.size.width/2 - 6;
     }
     return self;
+}
+
+
+-(void)setLineWidth:(CGFloat)lineWidth
+{
+    if (lineWidth > 10) {
+        _lineWidth = 10;
+    }else if (lineWidth < 1)
+    {
+        _lineWidth = 1;
+    }
 }
 
 -(void)DrawArc:(CGFloat)percentToDraw
@@ -41,7 +51,7 @@ CGFloat radius;
 }
 
 
--(void)drawArc:(CGFloat )percentToDraw radius:(CGFloat)radius lineWidth:(CGFloat)lineWidth strokeColor:(UIColor *)strokeColor fillColor:(UIColor *)fillColor startPoint:(VVChartBeginPoint)startPoint isClockwise:(BOOL)isClockWise circleSpeed:(VVCircleSpeed)circleSpeed;
+-(void)drawArc:(CGFloat )percentToDraw radius:(CGFloat)radius lineWidth:(CGFloat)lineWidth strokeColor:(UIColor *)strokeColor fillColor:(UIColor *)fillColor startPoint:(VVChartBeginPoint)startPoint isClockwise:(BOOL)isClockWise circleSpeed:(VVCircleSpeed)circleSpeed
 {
     CGFloat duration;
     
@@ -87,7 +97,7 @@ CGFloat radius;
             break;
     }
     
-    circle.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(radius,radius)  radius:radius startAngle:DEGREES_TO_RADIANS(startAngle) endAngle:DEGREES_TO_RADIANS(endAngle) clockwise:isClockWise].CGPath;
+    circle.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(radius+6,radius+6)  radius:radius startAngle:DEGREES_TO_RADIANS(startAngle) endAngle:DEGREES_TO_RADIANS(endAngle) clockwise:isClockWise].CGPath;
     
     //circle.position = CGPointMake(CGRectGetMidX(self.frame)-radius, CGRectGetMidY(self.frame)-radius);
     
@@ -97,7 +107,18 @@ CGFloat radius;
     circle.strokeEnd = percentToDraw/100;
     circle.lineCap = kCALineCapRound;
     
-    [self.layer addSublayer:circle];
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.startPoint = CGPointMake(0.5,1.0);
+    gradientLayer.endPoint = CGPointMake(0.5,0.0);
+    gradientLayer.frame = CGRectMake(0, 0, self.frame.size.width , self.frame.size.height);
+    NSMutableArray *colors = [NSMutableArray array];
+    [colors addObject:(id)[UIColor blackColor].CGColor];
+    [colors addObject:(id)strokeColor.CGColor];
+
+    gradientLayer.colors = colors;
+    [gradientLayer setMask:circle];
+    
+    [self.layer addSublayer:gradientLayer];
     
     CABasicAnimation *drawAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
     drawAnimation.duration            = duration;
@@ -119,6 +140,16 @@ CGFloat radius;
     [lblCounting setTextAlignment:NSTextAlignmentCenter];
     lblCounting.format = @"%.0f%%";
     [self addSubview:lblCounting];
+    
+    [self.delegate circleCompleted];
+    
+    
+//    NSTimer *t = [NSTimer scheduledTimerWithTimeInterval: duration
+//                                                  target: self.delegate
+//                                                selector:@selector(circleCompleted)
+//                                                userInfo: nil repeats:NO];
+//    
+    
 }
 
 

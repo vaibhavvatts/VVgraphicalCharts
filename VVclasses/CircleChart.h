@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol VVCircleChartProtocol <NSObject>
+
+@required
+
+-(void)circleCompleted;
+
+@end
+
 typedef NS_ENUM(NSInteger, VVChartBeginPoint) {
     VVChartBeginPointTop,
     VVChartBeginPointRight,
@@ -24,13 +32,16 @@ typedef NS_ENUM(NSInteger , VVCircleSpeed) {
 
 @interface CircleChart : UIView
 
-@property CGFloat lineWidth;
+@property (nonatomic) CGFloat lineWidth;
 @property UIColor *strokeColor;
 @property UIColor *fillColor;
 @property VVChartBeginPoint startPoint;
 @property VVCircleSpeed circleSpeed;
 @property BOOL isClockwise;
 
+
+
+@property (nonatomic, weak) id <VVCircleChartProtocol> delegate;
 
 
 -(id)initWithFrame:(CGRect)frame;

@@ -7,10 +7,10 @@
 //
 
 #import "ViewController.h"
-
 #import "CircleChart.h"
 
-@interface ViewController ()
+
+@interface ViewController ()<VVCircleChartProtocol>
 
 @end
 
@@ -20,11 +20,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    CircleChart *cc = [[CircleChart alloc]initWithFrame:CGRectMake(50, 50, 100, 100)];
+    CircleChart *cc = [[CircleChart alloc]initWithFrame:CGRectMake(50, 50, 200, 200)];
     [cc setStrokeColor:[UIColor redColor]];
+    [cc setLineWidth:15];
+    cc.delegate = self;
+    [cc DrawArc:90];
     
-    [cc DrawArc:90];    
-    [self.view addSubview:cc];
+    [self.view addSubview:cc];    
+    
+}
+
+-(void)circleCompleted
+{
     
 }
 
