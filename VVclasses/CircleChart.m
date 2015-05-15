@@ -106,7 +106,7 @@ CGFloat radius;
     circle.lineWidth = lineWidth;
     circle.strokeEnd = percentToDraw/100;
     circle.lineCap = kCALineCapRound;
-    
+   
     
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     gradientLayer.startPoint = CGPointMake(0.5,1.0);
@@ -137,22 +137,23 @@ CGFloat radius;
     [circle addAnimation:drawAnimation forKey:@"drawCircleAnimation"];
     
     // circle label
-    UICountingLabel *lblCounting = [[UICountingLabel alloc]initWithFrame:CGRectMake((self.frame.size.width - 60)/2,(self.frame.size.height - 25)/2, 60, 25)];
+    UICountingLabel *lblCounting = [[UICountingLabel alloc]initWithFrame:CGRectMake(0,0, self.frame.size.width, self.frame.size.height)];
     [lblCounting countFrom:0 to:percentToDraw withDuration:percentToDraw/40];
     [lblCounting countFromZeroTo:percentToDraw withDuration:duration];
     [lblCounting setTextColor:strokeColor];
-    [lblCounting setFont:[UIFont fontWithName:@"Helvetica-Bold" size:15]];
+    [lblCounting setFont:[UIFont fontWithName:@"Helvetica-Bold" size:radius/4]];
     [lblCounting setTextAlignment:NSTextAlignmentCenter];
     lblCounting.format = @"%.0f%%";
     [self addSubview:lblCounting];
     
-   
-    
     
     NSTimer *t = [NSTimer scheduledTimerWithTimeInterval: duration
-                                                  target: self
+                                                  target: (id) self
                                                 selector:@selector(callCircleCompleted)
                                                 userInfo: nil repeats:NO];
+    
+    
+    
     
     
 }
