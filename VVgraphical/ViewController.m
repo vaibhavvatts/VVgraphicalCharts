@@ -14,23 +14,23 @@
 #import "CircleChart.h"
 
 #import "LineChart.h"
-#import "Yaxis.h"
 
-#import "Xaxis.h"
+
+#import "AxisPlotting.h"
 
 
 
 @interface ViewController ()
 {
     NSMutableArray *arrData;
-    NSArray *chartData;
+    NSDictionary *chartData;
     NSMutableArray *mutableChartData;
     
     
     __weak IBOutlet UIView *subView;
     
 }
-@property (weak, nonatomic) IBOutlet UIScrollView *scrlView;
+
 
 @end
 
@@ -77,32 +77,37 @@
 //    NSValue *value = points[0];
 //    CGPoint p1 = [value CGPointValue];
     
-//    [self initFakeData];
-//    
-//    LineChart *lineChart = [[LineChart alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 300) chartData:chartData];
-//    [self.view addSubview:lineChart];
-    
     [self initFakeData];
     
-    Xaxis *xaxis = [[Xaxis alloc]initWithFrame:CGRectMake(0, 50, 300, 100) arrValues:mutableChartData];
-    [xaxis setBackgroundColor:[UIColor yellowColor]];
-    [self.view addSubview:xaxis];
+    LineChart *lineChart = [[LineChart alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 300) chartData:chartData];
+    [self.view addSubview:lineChart];
+
+
+    // fakeStaticData
+//    [mutableChartData removeAllObjects];
+//    for (int i =0; i< 3; i++) {
+//        [mutableChartData addObject:@"sun"];
+//    }
+
+//    AxisPlotting *xaxis = [[AxisPlotting alloc]initWithFrame:CGRectMake(0, 50, self.view.bounds.size.width, 100) arrValues:mutableChartData dataFormat:VVdataFormatNumeric axisType:VVaxisTypeVertical];
+//    [xaxis setBackgroundColor:[UIColor yellowColor]];
+//    [xaxis setNumberOfDashes:6];
+//    [self.view addSubview:xaxis];
 }
 
 - (void)initFakeData
 {
     NSMutableArray *mutableLineCharts = [NSMutableArray array];
-    for (int lineIndex=0; lineIndex<2; lineIndex++)
+    for (int lineIndex=0; lineIndex<1; lineIndex++)
     {
         mutableChartData = [NSMutableArray array];
         for (int i=0; i<11; i++)
         {
-            [mutableChartData addObject:[NSNumber numberWithFloat:((double)arc4random() / ARC4RANDOM_MAX) * 66879652]];
+            [mutableChartData addObject:[NSNumber numberWithFloat:((double)arc4random() / ARC4RANDOM_MAX) * 1000]];
         }
         [mutableLineCharts addObject:mutableChartData];
     }
-    chartData = [NSArray arrayWithArray:mutableLineCharts];
-    
+    chartData = [[NSDictionary alloc]initWithObjects:mutableLineCharts forKeys:[[NSArray alloc]initWithObjects:@"ChartTitleOne", nil]];
 }
 
 

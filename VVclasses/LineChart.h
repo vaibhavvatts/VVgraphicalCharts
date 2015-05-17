@@ -11,6 +11,6 @@
 @interface LineChart : UIView
 
 
--(id)initWithFrame:(CGRect)frame chartData:(NSArray *)chartData;
+-(id)initWithFrame:(CGRect)frame chartData:(NSDictionary *)dictChartData;
 
 @end

@@ -10,26 +10,44 @@
 #define width self.bounds.size.width
 #define height self.bounds.size.height
 
-#import "Xaxis.h"
+#import "AxisPlotting.h"
 
-@interface Xaxis()
+@interface AxisPlotting()
 {
     NSMutableArray *arrPlotData;
     NSArray *arrValues;
+    
 }
 
 @end
-@implementation Xaxis
+@implementation AxisPlotting
 
 
--(instancetype)initWithFrame:(CGRect)frame arrValues:(NSArray *)arrValuesReceived
+-(instancetype)initWithFrame:(CGRect)frame arrValues:(NSArray *)arrValuesReceived dataFormat:(VVdataFormat)dataFormat axisType:(VVaxisType)axisType
 {
     self = [super initWithFrame:frame];
     if (self) {
+        // default properties
         _lineWidth = 3;
-        _marginLTR = 10;
+        _margin = 14;
         _lineColor = [UIColor blackColor];
+        _dashColor = [UIColor blackColor];
+        _textColor = [UIColor blackColor];
+        _textSize = 10;
+        _numberOfDashes = (uint)arrValuesReceived.count;
+        _axisType = axisType;
+
         arrValues = [[NSArray alloc] initWithArray:arrValuesReceived];
+        arrPlotData = [[NSMutableArray alloc]init];
+
+        [self setBackgroundColor:[UIColor whiteColor]];
+
+        if (dataFormat == VVdataFormatNumeric) {
+            [self prepareNumericPlotValues];
+        }else if (dataFormat == VVdataFormatStatic){
+            arrPlotData = [arrValuesReceived copy];
+        }
+
     }
     return self;
 }
@@ -38,13 +56,13 @@
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
     [self drawLine];
-    
-//    [self preparePlotValues];
-//    
     [self plotDashes];
-//    
-//    [self plotValues];
-//    
+    [self plotValues];
+}
+
+-(void)loadXaxis
+{
+    [self setNeedsDisplay];
 }
 
 -(void)drawLine
@@ -52,55 +70,82 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetStrokeColorWithColor(context, _lineColor.CGColor);
     CGContextSetLineWidth(context, _lineWidth);
-    CGContextMoveToPoint(context, _marginLTR,  _marginLTR) ;
-    CGContextAddLineToPoint(context, width - _marginLTR, _marginLTR);
+    if (_axisType == VVaxisTypeHorizontal) {
+        CGContextMoveToPoint(context, _margin,  _margin) ;
+        CGContextAddLineToPoint(context, width - _margin, _margin);
+
+    }else if (_axisType == VVaxisTypeVertical){
+        CGContextMoveToPoint(context, width - _margin, _margin);
+        CGContextAddLineToPoint(context, width - _margin, height - _margin);
+    }
     CGContextStrokePath(context);
 }
 
 -(void)plotValues
 {
-    // plot Labels for figures
+    UILabel *lblFigure;
     CGFloat intermediateGap = 0.0f;
-    for (int i=0; i<arrPlotData.count; i++) {
-        UILabel *lblFigure = [[UILabel alloc]initWithFrame:CGRectMake(width - _marginLTR - 60, _marginLTR + intermediateGap - 5, 50, 10)];
+
+    for (int i=0; i<_numberOfDashes; i++) {
+        if (_axisType == VVaxisTypeHorizontal) {
+            lblFigure = [[UILabel alloc]initWithFrame:CGRectMake(_margin + intermediateGap - 5 , _margin  + 10, 50, 10)];
+            intermediateGap += (width - 2*_margin) / (_numberOfDashes - 1);
+            [lblFigure setTextAlignment:NSTextAlignmentLeft];
+        }else if (_axisType == VVaxisTypeVertical){
+            lblFigure = [[UILabel alloc]initWithFrame:CGRectMake(width - _margin - 60, _margin + intermediateGap - 5, 50, 10)];
+            intermediateGap += (height - 2*_margin) / (_numberOfDashes - 1);
+            [lblFigure setTextAlignment:NSTextAlignmentRight];
+        }
         [lblFigure setText:[arrPlotData objectAtIndex:i]];
-        [lblFigure setTextColor:_lineColor];
-        [lblFigure setFont:[UIFont fontWithName:@"Helvetica" size:10]];
-        [lblFigure setTextAlignment:NSTextAlignmentRight];
-        //[lblFigure setBackgroundColor:[UIColor yellowColor]];
+        [lblFigure setTextColor:_textColor];
+        [lblFigure setFont:[UIFont fontWithName:@"Helvetica" size:_textSize]];
+
         [self addSubview:lblFigure];
-        
-        intermediateGap += (height - 2*_marginLTR) / 10;
     }
 }
 
 -(void)plotDashes
 {
     // ploting on line.
-    CGFloat intermediateGap;
-    for (int i=0; i<10; i++) {
+    CGFloat intermediateGap = 0;
+    CGFloat eitherGap = 0.0f;
+    for (int i=0; i<_numberOfDashes; i++) {
         UIBezierPath *path = [UIBezierPath bezierPath];
-        [path moveToPoint:CGPointMake(_marginLTR + intermediateGap, _marginLTR)];
-        [path addLineToPoint:CGPointMake(_marginLTR + intermediateGap, _marginLTR)];
+
+        if (i==0) {
+            eitherGap = 1;
+        }else if (i == arrPlotData.count -1 ){
+            eitherGap = -1;
+        }else{
+            eitherGap = 0;
+        }
+
+        if (_axisType == VVaxisTypeHorizontal) {
+            [path moveToPoint:CGPointMake(_margin + intermediateGap + eitherGap, _margin - 5)];
+            [path addLineToPoint:CGPointMake(_margin + intermediateGap + eitherGap , _margin + 5)];
+            intermediateGap += (width - 2*_margin) / (_numberOfDashes - 1);
+        }else if (_axisType == VVaxisTypeVertical){
+            [path moveToPoint:CGPointMake(width - _margin - 5, _margin + intermediateGap)];
+            [path addLineToPoint:CGPointMake(width - _margin + 5, _margin + intermediateGap)];
+            intermediateGap += (height - 2*_margin) / (_numberOfDashes -1);
+        }
         path.lineWidth = _lineWidth - 1;
         [_lineColor setStroke];
         [path stroke];
-        intermediateGap += (height - 2*_marginLTR) / 10;
+
     }
 }
 
--(void)preparePlotValues
+-(void)prepareNumericPlotValues
 {
-    arrPlotData = [[NSMutableArray alloc]init];
-    
     CGFloat maxVal = [[arrValues valueForKeyPath:@"@max.floatValue"] floatValue];
     CGFloat minVal = [[arrValues valueForKeyPath:@"@min.floatValue"] floatValue];
     
     NSMutableArray * arrIntermediateVal = [[NSMutableArray alloc]init];
     
     
-    CGFloat factor = (maxVal - minVal)/arrValues.count;
-    for (int i =1; i<=arrValues.count; i++) {
+    CGFloat factor = (maxVal - minVal)/_numberOfDashes;
+    for (int i =1; i<=_numberOfDashes; i++) {
         [arrIntermediateVal addObject:[NSString stringWithFormat:@"%f",(minVal + factor * i)]];
     }
     

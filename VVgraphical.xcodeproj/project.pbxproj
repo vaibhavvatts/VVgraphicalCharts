@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		801489A01B07AC270077095F /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8014899F1B07AC270077095F /* GraphView.m */; };
 		CD25433E1B03282900539C33 /* tmp.m in Sources */ = {isa = PBXBuildFile; fileRef = CD25433D1B03282900539C33 /* tmp.m */; };
 		CD2543731B034E0F00539C33 /* LineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2543721B034E0F00539C33 /* LineChart.m */; };
 		CD2A047A1B01D34E007BEFA4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2A04791B01D34E007BEFA4 /* main.m */; };
@@ -18,8 +19,7 @@
 		CD2A04941B01D34E007BEFA4 /* VVgraphicalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2A04931B01D34E007BEFA4 /* VVgraphicalTests.m */; };
 		CD2A04A01B01D459007BEFA4 /* CircleChart.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2A049F1B01D459007BEFA4 /* CircleChart.m */; };
 		CD2A04A31B0205F8007BEFA4 /* UICountingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2A04A11B0205F8007BEFA4 /* UICountingLabel.m */; };
-		CD45FE8C1B05CDB20014D1B8 /* Xaxis.m in Sources */ = {isa = PBXBuildFile; fileRef = CD45FE8B1B05CDB20014D1B8 /* Xaxis.m */; };
-		CD45FE8F1B05CDB90014D1B8 /* Yaxis.m in Sources */ = {isa = PBXBuildFile; fileRef = CD45FE8E1B05CDB90014D1B8 /* Yaxis.m */; };
+		CD45FE8C1B05CDB20014D1B8 /* AxisPlotting.m in Sources */ = {isa = PBXBuildFile; fileRef = CD45FE8B1B05CDB20014D1B8 /* AxisPlotting.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +33,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8014899E1B07AC270077095F /* GraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphView.h; sourceTree = "<group>"; };
+		8014899F1B07AC270077095F /* GraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphView.m; sourceTree = "<group>"; };
 		CD25433C1B03282900539C33 /* tmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tmp.h; sourceTree = "<group>"; };
 		CD25433D1B03282900539C33 /* tmp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tmp.m; sourceTree = "<group>"; };
 		CD2543711B034E0F00539C33 /* LineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineChart.h; sourceTree = "<group>"; };
@@ -54,10 +56,8 @@
 		CD2A049F1B01D459007BEFA4 /* CircleChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleChart.m; sourceTree = "<group>"; };
 		CD2A04A11B0205F8007BEFA4 /* UICountingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICountingLabel.m; sourceTree = "<group>"; };
 		CD2A04A21B0205F8007BEFA4 /* UICountingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICountingLabel.h; sourceTree = "<group>"; };
-		CD45FE8A1B05CDB20014D1B8 /* Xaxis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Xaxis.h; sourceTree = "<group>"; };
-		CD45FE8B1B05CDB20014D1B8 /* Xaxis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Xaxis.m; sourceTree = "<group>"; };
-		CD45FE8D1B05CDB90014D1B8 /* Yaxis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yaxis.h; sourceTree = "<group>"; };
-		CD45FE8E1B05CDB90014D1B8 /* Yaxis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Yaxis.m; sourceTree = "<group>"; };
+		CD45FE8A1B05CDB20014D1B8 /* AxisPlotting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AxisPlotting.h; sourceTree = "<group>"; };
+		CD45FE8B1B05CDB20014D1B8 /* AxisPlotting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AxisPlotting.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +100,8 @@
 		CD2A04761B01D34E007BEFA4 /* VVgraphical */ = {
 			isa = PBXGroup;
 			children = (
+				8014899E1B07AC270077095F /* GraphView.h */,
+				8014899F1B07AC270077095F /* GraphView.m */,
 				CD2A047B1B01D34E007BEFA4 /* AppDelegate.h */,
 				CD2A047C1B01D34E007BEFA4 /* AppDelegate.m */,
 				CD2A047E1B01D34E007BEFA4 /* ViewController.h */,
@@ -149,10 +151,8 @@
 				CD25433D1B03282900539C33 /* tmp.m */,
 				CD2543711B034E0F00539C33 /* LineChart.h */,
 				CD2543721B034E0F00539C33 /* LineChart.m */,
-				CD45FE8A1B05CDB20014D1B8 /* Xaxis.h */,
-				CD45FE8B1B05CDB20014D1B8 /* Xaxis.m */,
-				CD45FE8D1B05CDB90014D1B8 /* Yaxis.h */,
-				CD45FE8E1B05CDB90014D1B8 /* Yaxis.m */,
+				CD45FE8A1B05CDB20014D1B8 /* AxisPlotting.h */,
+				CD45FE8B1B05CDB20014D1B8 /* AxisPlotting.m */,
 			);
 			path = VVclasses;
 			sourceTree = "<group>";
@@ -258,14 +258,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD2A04A01B01D459007BEFA4 /* CircleChart.m in Sources */,
+				801489A01B07AC270077095F /* GraphView.m in Sources */,
 				CD2543731B034E0F00539C33 /* LineChart.m in Sources */,
 				CD2A04801B01D34E007BEFA4 /* ViewController.m in Sources */,
 				CD2A04A31B0205F8007BEFA4 /* UICountingLabel.m in Sources */,
 				CD25433E1B03282900539C33 /* tmp.m in Sources */,
 				CD2A047D1B01D34E007BEFA4 /* AppDelegate.m in Sources */,
-				CD45FE8F1B05CDB90014D1B8 /* Yaxis.m in Sources */,
 				CD2A047A1B01D34E007BEFA4 /* main.m in Sources */,
-				CD45FE8C1B05CDB20014D1B8 /* Xaxis.m in Sources */,
+				CD45FE8C1B05CDB20014D1B8 /* AxisPlotting.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

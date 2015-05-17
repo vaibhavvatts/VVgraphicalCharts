@@ -14,9 +14,10 @@
 
 @interface LineChart()
 {
-    NSArray *arrChartData;
+    NSMutableArray *arrChartData;
     NSMutableArray *plotPoints;
     NSMutableArray *actualPoints;
+    NSArray *chartTitles;
 }
 
 @end
@@ -24,20 +25,32 @@
 @implementation LineChart
 
 
--(id)initWithFrame:(CGRect)frame chartData:(NSArray *)chartData
+-(id)initWithFrame:(CGRect)frame chartData:(NSDictionary *)dictChartData
 {
     self = [super initWithFrame:frame];
     if (self) {
         actualPoints = [[NSMutableArray alloc]init];
-        arrChartData = [[NSArray alloc]init];
+        arrChartData = [[NSMutableArray alloc]init];
         plotPoints = [[NSMutableArray alloc]init];
-        for (arrChartData in chartData) {
-            CGFloat max = [[arrChartData valueForKeyPath:@"@max.floatValue"] floatValue];
-            CGFloat min = [[arrChartData valueForKeyPath:@"@min.floatValue"] floatValue];
-            for (NSString *strVal in arrChartData) {
-                [plotPoints addObject:[NSString stringWithFormat:@"%f",-1 * ((( [strVal floatValue] - min) / (max - min) * 300) - 300)]];
+
+        chartTitles = [[dictChartData allKeys] copy];
+
+        NSMutableArray *chartData = [[NSMutableArray alloc]init];
+        for (NSString *title in chartTitles) {
+            [chartData addObject:[dictChartData valueForKey:title]];
+        }
+
+        NSLog(@"%@",[chartData objectAtIndex:0]);
+
+        for (int i =0; i< chartData.count; i++) {
+            for (arrChartData in [dictChartData objectForKey:@"ChartTitleOne"]) {
+                CGFloat max = [[arrChartData valueForKeyPath:@"@max.floatValue"] floatValue];
+                CGFloat min = [[arrChartData valueForKeyPath:@"@min.floatValue"] floatValue];
+                for (NSString *strVal in arrChartData) {
+                    [plotPoints addObject:[NSString stringWithFormat:@"%f",-1 * ((( [strVal floatValue] - min) / (max - min) * 300) - 300)]];
+                }
+                break;
             }
-            break;
         }
         [self preparePlotPoints:plotPoints];
     }
