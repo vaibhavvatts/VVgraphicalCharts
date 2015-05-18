@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
@@ -15,12 +15,57 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sp0-MG-2jk" customClass="YaxisPlotting">
+                                <rect key="frame" x="16" y="20" width="68" height="222"/>
+                                <color key="backgroundColor" red="1" green="0.73333333329999995" blue="0.015686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="222" id="3pf-M6-RjE"/>
+                                    <constraint firstAttribute="width" constant="68" id="G6i-Qo-O22"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tNT-Tk-Hdh" customClass="GraphPlotting">
+                                <rect key="frame" x="84" y="20" width="500" height="222"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="222" id="wbU-ns-HO5"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ght-YR-E7c" customClass="XaxisPlotting">
+                                <rect key="frame" x="84" y="242" width="500" height="75"/>
+                                <color key="backgroundColor" red="0.0" green="0.61335682479999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="mZP-Ic-XDu"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MWc-HM-GAw">
+                                <rect key="frame" x="16" y="337" width="568" height="243"/>
+                                <color key="backgroundColor" red="1" green="0.4136756889" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="sp0-MG-2jk" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="20" id="2CT-wx-Imz"/>
+                            <constraint firstAttribute="bottom" secondItem="MWc-HM-GAw" secondAttribute="bottom" constant="20" id="FYn-8R-BuX"/>
+                            <constraint firstItem="tNT-Tk-Hdh" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="20" id="Kzo-M0-CSG"/>
+                            <constraint firstItem="tNT-Tk-Hdh" firstAttribute="leading" secondItem="sp0-MG-2jk" secondAttribute="trailing" id="Ldj-q3-iQb"/>
+                            <constraint firstAttribute="trailing" secondItem="MWc-HM-GAw" secondAttribute="trailing" constant="16" id="VdY-s2-pPj"/>
+                            <constraint firstItem="Ght-YR-E7c" firstAttribute="top" secondItem="tNT-Tk-Hdh" secondAttribute="bottom" id="Vno-nr-yXk"/>
+                            <constraint firstItem="Ght-YR-E7c" firstAttribute="leading" secondItem="sp0-MG-2jk" secondAttribute="trailing" id="blZ-Pb-8DU"/>
+                            <constraint firstAttribute="trailing" secondItem="tNT-Tk-Hdh" secondAttribute="trailing" constant="16" id="jPF-K9-yU1"/>
+                            <constraint firstItem="sp0-MG-2jk" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="16" id="tmH-Jn-XE3"/>
+                            <constraint firstItem="MWc-HM-GAw" firstAttribute="top" secondItem="Ght-YR-E7c" secondAttribute="bottom" constant="20" id="w6k-wk-RdE"/>
+                            <constraint firstAttribute="trailing" secondItem="Ght-YR-E7c" secondAttribute="trailing" constant="16" id="z69-O4-Z7N"/>
+                            <constraint firstItem="MWc-HM-GAw" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="16" id="zGa-xJ-M6N"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="graphView" destination="MWc-HM-GAw" id="81I-qq-720"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="343" y="412"/>
+            <point key="canvasLocation" x="-227" y="420"/>
         </scene>
     </scenes>
 </document>

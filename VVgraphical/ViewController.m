@@ -13,8 +13,8 @@
 #import "ViewController.h"
 #import "CircleChart.h"
 
+#import "CurvedLineChart.h"
 #import "LineChart.h"
-
 
 #import "AxisPlotting.h"
 
@@ -26,9 +26,7 @@
     NSDictionary *chartData;
     NSMutableArray *mutableChartData;
     
-    
-    __weak IBOutlet UIView *subView;
-    
+    __weak IBOutlet UIView *graphView;
 }
 
 
@@ -49,38 +47,10 @@
 //    [self.view addSubview:cc];
     
     
-    // data sampling
-//    arrData = [[NSMutableArray alloc]init];
+//    [self initFakeData];
 //    
-//    int minVal = 80;
-//    int maxVal = 58744325;
-//    
-//    NSMutableArray * arrIntermediateVal = [[NSMutableArray alloc]init];
-//
-    
-//    int factor = (maxVal - minVal)/10;
-//    for (int i =1; i<=10; i++) {
-//        [arrIntermediateVal addObject:[NSString stringWithFormat:@"%d",(minVal + factor * i)]];
-//    }
-//    
-//    
-//    for (NSString *digitStr in arrIntermediateVal) {
-//        [self formatDigits:(uint)[digitStr length] data:digitStr];
-//    }
-//    
-//    NSLog(@"%@",arrData);
-
-    
-    
-//    
-//    NSArray *points = [[NSArray alloc]initWithObjects:NSStringFromCGPoint(CGPointMake(10, 20)), nil];
-//    NSValue *value = points[0];
-//    CGPoint p1 = [value CGPointValue];
-    
-    [self initFakeData];
-    
-    LineChart *lineChart = [[LineChart alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 300) chartData:chartData];
-    [self.view addSubview:lineChart];
+//    LineChart *lineChart = [[LineChart alloc]initWithFrame:CGRectMake(0, 0, graphView.frame.size.width, graphView.bounds.size.height) chartData:chartData];
+//    [graphView addSubview:lineChart];
 
 
     // fakeStaticData
@@ -93,6 +63,17 @@
 //    [xaxis setBackgroundColor:[UIColor yellowColor]];
 //    [xaxis setNumberOfDashes:6];
 //    [self.view addSubview:xaxis];
+    
+    
+    [graphView layoutIfNeeded];
+    [self initFakeData];
+    
+    LineChart *lineChart = [[LineChart alloc]initWithFrame:CGRectMake(0, 0, graphView.frame.size.width, graphView.bounds.size.height) chartData:chartData];
+    [lineChart setFillColor:[UIColor lightGrayColor]];
+    [lineChart setLineColor:[UIColor darkGrayColor]];
+    [lineChart setLineWidth:6];
+    [graphView addSubview:lineChart];
+    NSLog(@"%f",graphView.frame.size.width);
 }
 
 - (void)initFakeData
@@ -101,9 +82,9 @@
     for (int lineIndex=0; lineIndex<1; lineIndex++)
     {
         mutableChartData = [NSMutableArray array];
-        for (int i=0; i<11; i++)
+        for (int i=0; i<15; i++)
         {
-            [mutableChartData addObject:[NSNumber numberWithFloat:((double)arc4random() / ARC4RANDOM_MAX) * 1000]];
+            [mutableChartData addObject:[NSNumber numberWithFloat:((double)arc4random() / ARC4RANDOM_MAX) * 500]];
         }
         [mutableLineCharts addObject:mutableChartData];
     }

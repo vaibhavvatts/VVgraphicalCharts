@@ -1,13 +1,13 @@
 //
-//  GraphView.h
+//  GraphPlotting.h
 //  VVgraphical
 //
-//  Created by Vaibhav Kumar on 16/05/15.
+//  Created by Vaibhav Kumar on 5/18/15.
 //  Copyright (c) 2015 OpenSource. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface GraphView : UIView
+@interface GraphPlotting : UIView
 
 @end

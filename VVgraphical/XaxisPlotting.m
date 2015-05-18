@@ -9,10 +9,10 @@
 
 #define ARC4RANDOM_MAX 0x100000000
 
-#import "GraphView.h"
+#import "XaxisPlotting.h"
+#import "AxisPlotting.h"
 
-
-@interface GraphView()
+@interface XaxisPlotting()
 {
     UIScrollView *scrollView;
     NSArray *chartData;
@@ -21,32 +21,34 @@
 
 @end
 
-@implementation GraphView
+@implementation XaxisPlotting
 
 
 -(void)awakeFromNib
 {
     scrollView = [[UIScrollView alloc]init];
     [scrollView setBackgroundColor:[UIColor yellowColor]];
-    //[self addSubview:scrollView];
+    [self addSubview:scrollView];
 
 }
 
 
 -(void)layoutSubviews
 {
+    [self setNeedsDisplay  ];
     [scrollView setFrame:CGRectMake(5, 5, self.bounds.size.width-10, self.bounds.size.height-10)];
     [self setupGraph];
-
+    
 }
 
 
 -(void)setupGraph
 {
     [self initFakeData];
-//    Yaxis *yAxis = [[Yaxis alloc]initWithFrame:CGRectMake(5, 5, 50, 600) arrValues:mutableChartData];
-//    [scrollView addSubview:yAxis];
-//    [scrollView setContentSize:CGSizeMake(scrollView.bounds.size.width, 600)];
+    AxisPlotting *yAxis = [[AxisPlotting alloc]initWithFrame:CGRectMake(0, 10, scrollView.bounds.size.width - 5, 80) arrValues:mutableChartData dataFormat:VVdataFormatNumeric axisType:VVaxisTypeHorizontal];
+    [scrollView addSubview:yAxis];
+    [scrollView setScrollEnabled:YES];
+    //[scrollView setContentSize:CGSizeMake(scrollView.bounds.size.width, 600)];
 }
 
 

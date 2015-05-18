@@ -72,13 +72,15 @@
     CGContextSetLineWidth(context, _lineWidth);
     if (_axisType == VVaxisTypeHorizontal) {
         CGContextMoveToPoint(context, _margin,  _margin) ;
-        CGContextAddLineToPoint(context, width - _margin, _margin);
+        CGContextAddLineToPoint(context, width - _margin, _margin); 
 
     }else if (_axisType == VVaxisTypeVertical){
         CGContextMoveToPoint(context, width - _margin, _margin);
         CGContextAddLineToPoint(context, width - _margin, height - _margin);
     }
     CGContextStrokePath(context);
+    
+    //CGContextFlush(context);
 }
 
 -(void)plotValues
