@@ -23,7 +23,7 @@
 @interface ViewController ()
 {
     NSMutableArray *arrData;
-    NSDictionary *chartData;
+    NSMutableDictionary *chartData;
     NSMutableArray *mutableChartData;
     
     __weak IBOutlet UIView *graphView;
@@ -36,6 +36,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    chartData = [[NSMutableDictionary alloc]init];
     // Do any additional setup after loading the view, typically from a nib.
     
 //    CircleChart *cc = [[CircleChart alloc]initWithFrame:CGRectMake(50, 50, 200, 200)];
@@ -64,13 +67,15 @@
 //    [xaxis setNumberOfDashes:6];
 //    [self.view addSubview:xaxis];
     
+
+    [xAxisObj getRef:graphObj];
     
     [graphView layoutIfNeeded];
     [self initFakeData];
     
     LineChart *lineChart = [[LineChart alloc]initWithFrame:CGRectMake(0, 0, graphView.frame.size.width, graphView.bounds.size.height) chartData:chartData];
-    [lineChart setFillColor:[UIColor lightGrayColor]];
-    [lineChart setLineColor:[UIColor darkGrayColor]];
+    [lineChart setFillColor:[[UIColor lightGrayColor] colorWithAlphaComponent:.5]];
+    [lineChart setLineColor:[[UIColor darkGrayColor] colorWithAlphaComponent:.5]];
     [lineChart setLineWidth:6];
     [graphView addSubview:lineChart];
     NSLog(@"%f",graphView.frame.size.width);
@@ -79,16 +84,20 @@
 - (void)initFakeData
 {
     NSMutableArray *mutableLineCharts = [NSMutableArray array];
-    for (int lineIndex=0; lineIndex<1; lineIndex++)
+    for (int lineIndex=0; lineIndex<2; lineIndex++)
     {
         mutableChartData = [NSMutableArray array];
-        for (int i=0; i<15; i++)
+        for (int i=0; i<10; i++)
         {
             [mutableChartData addObject:[NSNumber numberWithFloat:((double)arc4random() / ARC4RANDOM_MAX) * 500]];
         }
         [mutableLineCharts addObject:mutableChartData];
+        
+        [chartData setObject:mutableChartData forKeyedSubscript:[NSString stringWithFormat:@"%f",(double)arc4random() / ARC4RANDOM_MAX]];
     }
-    chartData = [[NSDictionary alloc]initWithObjects:mutableLineCharts forKeys:[[NSArray alloc]initWithObjects:@"ChartTitleOne", nil]];
+
+    
+
 }
 
 

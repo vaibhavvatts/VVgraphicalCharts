@@ -18,6 +18,9 @@
     NSMutableArray *plotPoints;
     NSMutableArray *actualPoints;
     NSArray *chartTitles;
+    
+    
+    NSMutableArray *arrFinal;
 }
 
 @end
@@ -38,22 +41,23 @@
         actualPoints = [[NSMutableArray alloc]init];
         arrChartData = [[NSMutableArray alloc]init];
         plotPoints = [[NSMutableArray alloc]init];
+        arrFinal = [[NSMutableArray alloc]init];
         
         chartTitles = [[dictChartData allKeys] copy];
         
         for (NSString *title in chartTitles) {
+            [arrChartData removeAllObjects];
             [arrChartData addObjectsFromArray:[dictChartData valueForKey:title]];
-        }
-        
-        for (int i =0; i< arrChartData.count; i++) {
-            CGFloat max = [[arrChartData valueForKeyPath:@"@max.floatValue"] floatValue];
-            CGFloat min = [[arrChartData valueForKeyPath:@"@min.floatValue"] floatValue];
+            [plotPoints removeAllObjects];
             for (NSString *strVal in arrChartData) {
-                [plotPoints addObject:[NSString stringWithFormat:@"%f",-1 * ((( [strVal floatValue] - min) / (max - min) * height) - height)]];
+                CGFloat max = [[arrChartData valueForKeyPath:@"@max.floatValue"] floatValue];
+                CGFloat min = [[arrChartData valueForKeyPath:@"@min.floatValue"] floatValue];
+               
+                    [plotPoints addObject:[NSString stringWithFormat:@"%f",-1 * ((( [strVal floatValue] - min) / (max - min) * height) - height)]];
+                
             }
-            break;
+            [self preparePlotPoints:plotPoints];
         }
-        [self preparePlotPoints:plotPoints];
     }
     return self;
 }
@@ -61,34 +65,45 @@
 -(void)preparePlotPoints:(NSMutableArray *)plotPoints
 {
     int intermediateWidth = 0;
-    
+    [actualPoints removeAllObjects];
     [actualPoints addObject:[NSValue valueWithCGPoint:CGPointMake(intermediateWidth + _marginAround, height)]];
     for (int i =0; i<arrChartData.count; i++) {
         intermediateWidth += (width / arrChartData.count);
         [actualPoints addObject:[NSValue valueWithCGPoint:CGPointMake(intermediateWidth,   [[plotPoints objectAtIndex:i] integerValue])]];
     }
     [actualPoints addObject:[NSValue valueWithCGPoint:CGPointMake(intermediateWidth, height)]];
+    
+    
+    [arrFinal addObject:[actualPoints copy]];
+    
 }
 
-
 - (void)drawRect:(CGRect)rect {
-    
-    UIBezierPath* starPath = UIBezierPath.bezierPath;
-    NSValue *value = actualPoints[0];
-    CGPoint p1 = [value CGPointValue];
-    [starPath moveToPoint:p1];
-    
-    for (int i=1; i<actualPoints.count; i++) {
-        value = actualPoints[i];
+    [actualPoints removeAllObjects];
+    for (int i=0; i<arrFinal.count; i++) {
+        [actualPoints removeAllObjects];
+        [actualPoints addObjectsFromArray:[[arrFinal objectAtIndex:i] copy]];
+        
+        UIBezierPath* starPath = UIBezierPath.bezierPath;
+        NSValue *value = actualPoints[0];
         CGPoint p1 = [value CGPointValue];
-        [starPath addLineToPoint:p1];
-    }    
+        [starPath moveToPoint:p1];
+        
+        for (int i=1; i<actualPoints.count; i++) {
+            value = actualPoints[i];
+            CGPoint p1 = [value CGPointValue];
+            [starPath addLineToPoint:p1];
+        }
+        
+        [starPath setLineWidth:_lineWidth] ;
+        [_lineColor setStroke];
+        [starPath stroke];
+        [_fillColor setFill];
+        [starPath fill];
+
+        
+    }
     
-    [starPath setLineWidth:_lineWidth] ;
-    [_lineColor setStroke];
-    [starPath stroke];
-    [_fillColor setFill];
-    [starPath fill];
 }
 
 @end

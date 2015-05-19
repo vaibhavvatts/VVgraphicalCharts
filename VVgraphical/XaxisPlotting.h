@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import "GraphPlotting.h"
+
 @interface XaxisPlotting : UIView
+
+
+-(void)getRef:(GraphPlotting *)refGraphPlotting;
 
 @end

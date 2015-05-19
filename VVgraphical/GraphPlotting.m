@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 OpenSource. All rights reserved.
 //
 
-
+#define chartWidth 500
 
 #define ARC4RANDOM_MAX 0x100000000
 
@@ -15,12 +15,12 @@
 #import "CurvedLineChart.h"
 
 
-@interface GraphPlotting()
+@interface GraphPlotting()<UIScrollViewDelegate>
 {
   
     UIScrollView *scrollView;
     NSMutableArray *arrData;
-    NSDictionary *chartData;
+    NSMutableDictionary *chartData;
     NSMutableArray *mutableChartData;
     
   
@@ -34,8 +34,8 @@
 {
     scrollView = [[UIScrollView alloc]init];
     [scrollView setBackgroundColor:[UIColor yellowColor]];
+    [scrollView setBounces:NO];
     [self addSubview:scrollView];
-    
 }
 
 
@@ -46,15 +46,21 @@
     [self setupGraph];
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [self.delegate graphDidScroll:scrollView.contentOffset.x];
+}
+
 -(void)setupGraph
 {
-    [self initFakeData];
-    CurvedLineChart *chart = [[CurvedLineChart alloc]initWithFrame:CGRectMake(0, 0, scrollView.bounds.size.width - 5, scrollView.bounds.size.height - 5) chartData:chartData];
+        [self initFakeData];
+    CurvedLineChart *chart = [[CurvedLineChart alloc]initWithFrame:CGRectMake(0, 0, chartWidth, scrollView.bounds.size.height - 5) chartData:chartData];
     [scrollView setScrollEnabled:YES];
+    [scrollView setContentSize:CGSizeMake(chartWidth, scrollView.bounds.size.height - 5)];
     //[chart setBackgroundColor:[[UIColor clearColor] colorWithAlphaComponent:0.5]];
     [scrollView addSubview:chart];
     
-    [self initFakeData];
+
 //    CurvedLineChart *chart2 = [[CurvedLineChart alloc]initWithFrame:CGRectMake(0, 0, scrollView.bounds.size.width - 5, scrollView.bounds.size.height - 5) chartData:chartData];
 //    [scrollView setScrollEnabled:YES];
 //    [chart2 setBackgroundColor:[[UIColor clearColor] colorWithAlphaComponent:0.5]];
@@ -70,13 +76,15 @@
     for (int lineIndex=0; lineIndex<1; lineIndex++)
     {
         mutableChartData = [NSMutableArray array];
-        for (int i=0; i<6; i++)
+        for (int i=0; i<10; i++)
         {
             [mutableChartData addObject:[NSNumber numberWithFloat:((double)arc4random() / ARC4RANDOM_MAX) * 66879652]];
         }
         [mutableLineCharts addObject:mutableChartData];
     }
-        chartData = [[NSDictionary alloc]initWithObjects:mutableLineCharts forKeys:[[NSArray alloc]initWithObjects:@"ChartTitleOne", nil]];
+        chartData = [[NSMutableDictionary alloc]initWithObjects:mutableLineCharts forKeys:[[NSArray alloc]initWithObjects:@"ChartTitleOne", nil]];
+    
+    //[chartData setObject:mutableChartData forKeyedSubscript:@"ChartTitleTwo"];
     
 }
 

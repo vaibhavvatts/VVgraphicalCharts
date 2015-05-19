@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol GraphScrollProtocol <NSObject>
+
+-(void)graphDidScroll:(CGFloat)xPoint;
+
+@end
+
 @interface GraphPlotting : UIView
+
+
+@property (weak, nonatomic) id <GraphScrollProtocol> delegate;
 
 @end

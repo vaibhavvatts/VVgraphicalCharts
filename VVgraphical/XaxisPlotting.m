@@ -28,8 +28,8 @@
 {
     scrollView = [[UIScrollView alloc]init];
     [scrollView setBackgroundColor:[UIColor yellowColor]];
+    [scrollView setBounces:NO];
     [self addSubview:scrollView];
-
 }
 
 
@@ -45,12 +45,17 @@
 -(void)setupGraph
 {
     [self initFakeData];
-    AxisPlotting *yAxis = [[AxisPlotting alloc]initWithFrame:CGRectMake(0, 10, scrollView.bounds.size.width - 5, 80) arrValues:mutableChartData dataFormat:VVdataFormatNumeric axisType:VVaxisTypeHorizontal];
+    AxisPlotting *yAxis = [[AxisPlotting alloc]initWithFrame:CGRectMake(0, 10, 500, 80) arrValues:mutableChartData dataFormat:VVdataFormatNumeric axisType:VVaxisTypeHorizontal];
+    [scrollView setContentSize:CGSizeMake(500, 80)];
     [scrollView addSubview:yAxis];
     [scrollView setScrollEnabled:YES];
     //[scrollView setContentSize:CGSizeMake(scrollView.bounds.size.width, 600)];
 }
 
+-(void)getRef:(GraphPlotting *)refGraphPlotting
+{
+    
+}
 
 - (void)initFakeData
 {

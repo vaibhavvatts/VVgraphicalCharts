@@ -7,9 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GraphPlotting.h"
+#import "XaxisPlotting.h"
 
 @interface ViewController : UIViewController
 
+
+{
+    IBOutlet GraphPlotting *graphObj;
+    IBOutlet XaxisPlotting *xAxisObj;
+}
 
 @end
 

@@ -60,7 +60,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="graphObj" destination="tNT-Tk-Hdh" id="1QN-w9-7si"/>
                         <outlet property="graphView" destination="MWc-HM-GAw" id="81I-qq-720"/>
+                        <outlet property="xAxisObj" destination="Ght-YR-E7c" id="uW3-5g-9mk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
